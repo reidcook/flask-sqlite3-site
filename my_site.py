@@ -18,7 +18,7 @@ def get_db():
 @app.route("/")
 def index(name=None):
         data = get_db()
-        return str(data)
+        return render_template("index.html", all_data=data)
 
 @app.teardown_appcontext
 def close_connection(exception):
