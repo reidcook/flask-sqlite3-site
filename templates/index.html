@@ -40,7 +40,7 @@
                     <label for="optionsInput" class="form-label">Selected User</label>
                     <select name="edit_user" class="form-select" aria-label="Default select example">
                         {% for user in all_data %}
-                            <option value="{{user[1]}}">{{user[0]}}</option>
+                            <option value="{{user[0]}}">{{user[1]}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -62,24 +62,45 @@
             </div>
             </form>
         </div>
-        <h2 style="text-align: center; padding: 1rem 0rem 1rem 0rem;">Search User</h2>
+        <h2 style="text-align: center; padding: 1rem 0rem 1rem 0rem;">Delete User</h2>
         <div class="container text-center">
+            <form action="/deleteuser" method="post">
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
                     <label for="optionsInput" class="form-label">Selected User</label>
                     <div style="display: flex;">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Choose a User</option>
-                            {% for user in all_data %}
-                                <option value="{{user[1]}}">{{user[0]}}</option>
-                            {% endfor %}
-                        </select>
-                        <button type="button" class="btn btn-primary">Submit</button>
+                    <select name="deleted_user" class="form-select" aria-label="Default select example">
+                        {% for user in all_data %}
+                            <option value="{{user[0]}}">{{user[1]}}</option>
+                        {% endfor %}
+                    </select>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </div>
                 </div>
                 <div class="col"></div>
             </div>
+            </form>
+        </div>
+        <h2 style="text-align: center; padding: 1rem 0rem 1rem 0rem;">Search User</h2>
+        <div class="container text-center">
+            <form action="/searchuser" method="post">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <label for="optionsInput" class="form-label">Selected User</label>
+                    <div style="display: flex;">
+                        <select name="searched_user" class="form-select" aria-label="Default select example">
+                            {% for user in all_data %}
+                                <option value="{{user[0]}}">{{user[1]}}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            </form>
         </div>
         <div style="padding: 0rem 1rem 0rem 1rem;">
             <table class="table table-striped">
@@ -91,9 +112,9 @@
                     </tr>
                 </thead>
                 <tr>
-                    <td>tests</td>
-                    <td>test</td>
-                    <td>tset</td>
+                    <td>{{selected_user[1]}}</td>
+                    <td>{{selected_user[0]}}</td>
+                    <td>{{selected_user[2]}}</td>
                 </tr>
             </table>
         </div>
@@ -105,15 +126,13 @@
                             <th scope="col">Name</th>
                             <th scope="col">Id</th>
                             <th scope="col">Points</th>
-                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     {% for item in all_data %}
                     <tr>
-                        <td>{{item[0]}}</td>
                         <td>{{item[1]}}</td>
+                        <td>{{item[0]}}</td>
                         <td>{{item[2]}}</td>
-                        <td><button type="button" class="btn-close" aria-label="Close"></button></td>
                     </tr>
                     {% endfor %}
                 </table>
