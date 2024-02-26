@@ -78,13 +78,15 @@ def delete():
             db = getattr(g, '_database,', None)
             db = g._database = sqlite3.connect(DATABASE)
             cursor = db.cursor()
-            newUser = (request.form['deleted_user'])
+            newUser = (request.form['deleted_user'],)
+            app.logger.info(newUser)
             try:
                 cursor.execute("DELETE FROM Users WHERE Id = ?", newUser)
                 db.commit()
                 db.close()
                 return redirect("/")
             except:
+                app.logger.info("exception")
                 return redirect("/")
 @app.route("/searchuser", methods=["POST"])
 def search():
